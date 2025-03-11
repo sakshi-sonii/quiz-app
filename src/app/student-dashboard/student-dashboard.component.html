@@ -1,0 +1,17 @@
+<div class="container mt-5">
+    <h2>Student Dashboard</h2>
+    <button class="btn btn-danger mb-3" (click)="logout()">Logout</button>
+  
+    <h3>Available Tests</h3>
+    <div class="card">
+      <div class="card-body">
+        <h5>Test List</h5>
+        <ul class="list-group">
+          <li class="list-group-item d-flex justify-content-between align-items-center" *ngFor="let test of tests">
+            {{ test.name }} (Duration: {{ test.duration }} minutes)
+            <button class="btn btn-primary btn-sm" (click)="attemptTest(test.id)">Attempt Test</button>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>

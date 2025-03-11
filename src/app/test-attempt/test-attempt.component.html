@@ -1,0 +1,61 @@
+<div class="container mt-5">
+    <div class="row">
+      <div class="col-md-8">
+        <h2>Test: {{ testId }}</h2>
+        <div class="card">
+          <div class="card-body">
+            <h5>Question {{ currentQuestionIndex + 1 }} of {{ questions.length }}</h5>
+            <p>{{ questions[currentQuestionIndex]?.text }}</p>
+            <div class="form-check" *ngFor="let option of questions[currentQuestionIndex]?.options; let i = index">
+              <input
+                class="form-check-input"
+                type="radio"
+                [name]="'question-' + currentQuestionIndex"
+                [id]="'option-' + i"
+                [value]="option"
+                [(ngModel)]="answers[currentQuestionIndex]"
+                (change)="selectAnswer(currentQuestionIndex, option)"
+              />
+              <label class="form-check-label" [for]="'option-' + i">{{ option }}</label>
+            </div>
+            <div class="mt-3">
+              <button class="btn btn-secondary me-2" (click)="prevQuestion()" [disabled]="currentQuestionIndex === 0">
+                Previous
+              </button>
+              <button class="btn btn-secondary me-2" (click)="nextQuestion()" [disabled]="currentQuestionIndex === questions.length - 1">
+                Next
+              </button>
+              <button class="btn btn-warning me-2" (click)="markForReview(currentQuestionIndex)">
+                {{ markedForReview.has(currentQuestionIndex) ? 'Unmark' : 'Mark for Review' }}
+              </button>
+              <button class="btn btn-danger me-2" (click)="clearResponse()">Clear Response</button>
+              <button class="btn btn-success" (click)="submitTest()">Submit Test</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="card">
+          <div class="card-body">
+            <h5>Time Left: {{ formatTime(timeLeft) }}</h5>
+            <h5>Question Palette</h5>
+            <div class="d-flex flex-wrap">
+              <button
+                *ngFor="let q of questions; let i = index"
+                class="btn m-1"
+                [ngClass]="{
+                  'btn-primary': i === currentQuestionIndex,
+                  'btn-success': answers[i] && !markedForReview.has(i),
+                  'btn-warning': markedForReview.has(i),
+                  'btn-secondary': !answers[i] && !markedForReview.has(i)
+                }"
+                (click)="currentQuestionIndex = i"
+              >
+                {{ i + 1 }}
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>

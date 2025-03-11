@@ -1,0 +1,12 @@
+<div class="container mt-5">
+    <h2>Test Results</h2>
+    <div class="card" *ngIf="result">
+      <div class="card-body">
+        <h5>Score: {{ result.score }} / {{ result.total }}</h5>
+        <h5>Percentage: {{ result.percentage }}%</h5>
+        <h5>Correct Answers: {{ result.correct }}</h5>
+        <h5>Incorrect Answers: {{ result.incorrect }}</h5>
+        <h5>Unattempted: {{ result.unattempted }}</h5>
+      </div>
+    </div>
+  </div>

@@ -1,0 +1,61 @@
+<div class="container mt-5">
+  <h2>Admin Dashboard</h2>
+  <button class="btn btn-danger mb-3" (click)="logout()">Logout</button>
+
+  <h3>Manage Teachers</h3>
+  <div class="card mb-3">
+    <div class="card-body">
+      <h5>Add Teacher</h5>
+      <form (ngSubmit)="addTeacher()">
+        <div class="mb-3">
+          <label for="teacherEmail" class="form-label">Email</label>
+          <input type="email" class="form-control" id="teacherEmail" [(ngModel)]="email" name="email" required />
+        </div>
+        <div class="mb-3">
+          <label for="teacherPassword" class="form-label">Password</label>
+          <input type="password" class="form-control" id="teacherPassword" [(ngModel)]="password" name="password" required />
+        </div>
+        <button type="submit" class="btn btn-primary">Add Teacher</button>
+      </form>
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-body">
+      <h5>Teacher List</h5>
+      <ul class="list-group">
+        <li class="list-group-item d-flex justify-content-between align-items-center" *ngFor="let teacher of teachers">
+          {{ teacher.email }}
+          <button class="btn btn-danger btn-sm" (click)="deleteTeacher(teacher.id)">Delete</button>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+  <h3>Manage Tests</h3>
+  <div class="card mb-3">
+    <div class="card-body">
+      <h5>Create Mock Test</h5>
+      <form (ngSubmit)="addTest()">
+        <div class="mb-3">
+          <label for="testName" class="form-label">Test Name</label>
+          <input type="text" class="form-control" id="testName" [(ngModel)]="name" name="name" required />
+        </div>
+        <div class="mb-3">
+          <label for="testDuration" class="form-label">Duration (minutes)</label>
+          <input type="number" class="form-control" id="testDuration" [(ngModel)]="duration" name="duration" required />
+        </div>
+        <button type="submit" class="btn btn-primary">Add Test</button>
+      </form>
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-body">
+      <h5>Test List</h5>
+      <ul class="list-group">
+        <li class="list-group-item" *ngFor="let test of tests">
+          {{ test.name }} (Duration: {{ test.duration }} minutes)
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>
